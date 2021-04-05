@@ -20,9 +20,9 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
- * 我的社团 列表页
+ * 近期活动 列表页
  */
-public class MyClubFragment extends BaseFragment {
+public class RecentEventsFragment extends BaseFragment {
 
     @Bind(R.id.recycler)
     RecyclerView recycler;
@@ -30,7 +30,7 @@ public class MyClubFragment extends BaseFragment {
     CommonAdapter adapter;
     List<String> datas;
 
-    public MyClubFragment() {
+    public RecentEventsFragment() {
         // Required empty public constructor
     }
 
@@ -41,25 +41,25 @@ public class MyClubFragment extends BaseFragment {
 
     @Override
     protected void initVariable() {
-        datas=new ArrayList<>();
+        datas = new ArrayList<>();
         datas.add("1");
         datas.add("1");
         datas.add("1");
         datas.add("1");
         datas.add("1");
-        llm=new LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false);
-        adapter=new CommonAdapter<String>(mContext,R.layout.item_my_club,datas) {
+        llm = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+        adapter = new CommonAdapter<String>(mContext, R.layout.item_recent_events, datas) {
             @Override
             protected void convert(ViewHolder viewHolder, String o, int i) {
-                viewHolder.setText(R.id.tv_name,"club name"+i);
-                viewHolder.setText(R.id.tv_content, "club 介绍" + i);
+                viewHolder.setText(R.id.tv_name, "club name" + i);
+                viewHolder.setText(R.id.tv_content, "club 活动" + i);
             }
         };
     }
 
     @OnClick(R.id.iv_head)
-    public void onClick(View view){
-        startActivity(new Intent(mContext,EditActivity.class));
+    public void onClick(View view) {
+        startActivity(new Intent(mContext, EditActivity.class));
     }
 
     @Override
@@ -71,6 +71,6 @@ public class MyClubFragment extends BaseFragment {
 
     @Override
     protected void onFragmentVisibleChange(boolean isVisible) {
-        LogUtils.e(TAG,"==============="+isVisible);
+        LogUtils.e(TAG, "===============" + isVisible);
     }
 }
