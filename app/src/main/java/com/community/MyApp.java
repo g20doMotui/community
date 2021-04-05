@@ -6,12 +6,6 @@ import com.easylib.utils.AppInitUtils;
 
 import cn.finalteam.galleryfinal.FunctionConfig;
 
-/**
- * 作　　者: guyj
- * 修改日期: 2017/4/9
- * 描　　述:
- * 备　　注:
- */
 
 public class MyApp extends Application{
     @Override

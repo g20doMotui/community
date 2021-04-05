@@ -62,7 +62,8 @@ dependencies {
     //增量编译,会影响zxing扫码解码速度
     compile 'com.antfortune.freeline:runtime:0.5.0'
     //流布局
-    compile 'com.zhy:flowlayout-lib:1.0.3'
+//    compile 'com.zhy:flowlayout-lib:1.0.3'
+    compile 'com.google.android:flexbox:0.2.6'
     //圆形头像
     compile 'com.github.kaxi4it:EasyImageView:1.2'
     //sweet弹框
@@ -71,4 +72,5 @@ dependencies {
     compile 'com.github.kaxi4it:EasyRecyclerViewAdapter:1.10'
     //拼音
     compile 'com.github.promeg:tinypinyin:1.0.0' // ~80KB
+
 }
