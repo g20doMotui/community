@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void processLogic(Bundle savedInstanceState) {
-//        doGetToken();
+
     }
 
     //初始化Tab数据

@@ -20,6 +20,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
 
+/**
+ * 编辑资料
+ */
 public class EditActivity extends BaseActivity {
 
     @Bind(R.id.tv_cancel)

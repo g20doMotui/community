@@ -53,6 +53,12 @@ public class MyClubFragment extends BaseFragment {
             protected void convert(ViewHolder viewHolder, String o, int i) {
                 viewHolder.setText(R.id.tv_name,"club name"+i);
                 viewHolder.setText(R.id.tv_content, "club 介绍" + i);
+                viewHolder.setOnClickListener(R.id.rl_root, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(mContext,ClubEventsActivity.class));
+                    }
+                });
             }
         };
     }

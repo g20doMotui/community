@@ -24,7 +24,8 @@
         <activity android:name=".ClubInfoActivity" />
         <activity android:name=".RefuseActivity" />
         <activity android:name=".ClubEventsActivity" />
-        <activity android:name=".MemberListActivity"></activity>
+        <activity android:name=".MemberListActivity" />
+        <activity android:name=".JoinClubActivity"></activity>
     </application>
 
 </manifest>

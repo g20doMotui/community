@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#aa111111"
     android:id="@+id/rl_root"
     >
 
@@ -37,6 +36,7 @@
                 android:id="@+id/spinner1"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:spinnerMode="dialog"
                 />
         </LinearLayout>
         <LinearLayout
@@ -55,6 +55,7 @@
                 android:id="@+id/spinner2"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:spinnerMode="dialog"
                 />
         </LinearLayout>
         <LinearLayout
@@ -73,6 +74,7 @@
                 android:id="@+id/spinner3"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:spinnerMode="dialog"
                 />
         </LinearLayout>
 

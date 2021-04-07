@@ -3,10 +3,7 @@ package com.community;
 import com.easylib.base.BaseSharedPreferences;
 
 /**
- * 作　　者: guyj
- * 修改日期: 2016/12/5
  * 描　　述: SharedPreferences单例类
- * 备　　注:
  */
 public class EasySP extends BaseSharedPreferences {
     /**

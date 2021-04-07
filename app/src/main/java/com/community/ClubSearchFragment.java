@@ -1,11 +1,13 @@
 package com.community;
 
 
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,24 +59,30 @@ public class ClubSearchFragment extends BaseFragment {
     protected void initVariable() {
         datas = new ArrayList<>();
         datas.add("1");
-        datas.add("1");
-        datas.add("1");
-        datas.add("1");
+        datas.add("2");
+        datas.add("3");
+        datas.add("4");
         pop1beans.add("1");
-        pop1beans.add("1");
-        pop2beans.add("1");
-        pop2beans.add("1");
-        pop2beans.add("1");
-        pop3beans.add("1");
-        pop3beans.add("1");
-        pop3beans.add("1");
-        pop3beans.add("1");
+        pop1beans.add("2");
+        pop2beans.add("3");
+        pop2beans.add("4");
+        pop2beans.add("5");
+        pop3beans.add("6");
+        pop3beans.add("7");
+        pop3beans.add("8");
+        pop3beans.add("9");
         llm = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         adapter = new CommonAdapter<String>(mContext, R.layout.item_my_club, datas) {
             @Override
             protected void convert(ViewHolder viewHolder, String o, int i) {
                 viewHolder.setText(R.id.tv_name, "club name" + i);
                 viewHolder.setText(R.id.tv_content, "club 介绍" + i);
+                viewHolder.setOnClickListener(R.id.rl_root, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(mContext,ClubInfoActivity.class));
+                    }
+                });
             }
         };
     }
@@ -108,7 +116,7 @@ public class ClubSearchFragment extends BaseFragment {
     private void showPop() {
 
         view = LayoutInflater.from(mContext).inflate(R.layout.pop_filter, ll_root, false);
-        popupWindow = new PopupWindow(view);
+        popupWindow = new PopupWindow(view,ll_root.getWidth(),ll_root.getHeight());
         popupWindow.setTouchable(true);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setBackgroundDrawable(new BitmapDrawable(getResources()));
@@ -157,7 +165,7 @@ public class ClubSearchFragment extends BaseFragment {
 
 
 //            popupWindow.showAsDropDown(v, 0, 0);
-        popupWindow.showAsDropDown(ll_root,0,0);
+        popupWindow.showAtLocation(ll_root, Gravity.CENTER,0,0);
 
     }
 }
