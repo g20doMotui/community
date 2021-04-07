@@ -48,7 +48,7 @@ public class MainActivity extends BaseActivity {
         //添加tab
         mTableItemList.add(new TabItem(R.drawable.ic_launcher, R.drawable.ic_launcher, R.string.tab1, MyClubFragment.class));
         mTableItemList.add(new TabItem(R.drawable.ic_launcher, R.drawable.ic_launcher, R.string.tab2, RecentEventsFragment.class));
-        mTableItemList.add(new TabItem(R.drawable.ic_launcher, R.drawable.ic_launcher, R.string.tab3, BlankFragment.class));
+        mTableItemList.add(new TabItem(R.drawable.ic_launcher, R.drawable.ic_launcher, R.string.tab3, ClubSearchFragment.class));
     }
 
 

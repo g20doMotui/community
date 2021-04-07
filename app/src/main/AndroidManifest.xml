@@ -20,11 +20,7 @@
         </activity>
         <activity
             android:name=".EditActivity"
-            android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".ClubInfoActivity" />
-        <activity android:name=".RefuseActivity" />
-        <activity android:name=".ClubEventsActivity" />
-        <activity android:name=".MemberListActivity"></activity>
+            android:windowSoftInputMode="stateHidden"></activity>
     </application>
 
 </manifest>

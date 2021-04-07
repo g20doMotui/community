@@ -68,9 +68,4 @@ public class RecentEventsFragment extends BaseFragment {
         recycler.setAdapter(adapter);
         recycler.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL_LIST));
     }
-
-    @Override
-    protected void onFragmentVisibleChange(boolean isVisible) {
-        LogUtils.e(TAG, "===============" + isVisible);
-    }
 }
