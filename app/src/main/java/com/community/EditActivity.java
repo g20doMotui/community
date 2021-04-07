@@ -1,24 +1,32 @@
 package com.community;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.community.entity.LabelBean;
+import com.community.entity.LoginBean;
 import com.easylib.base.BaseActivity;
+import com.easylib.okhttp.ResultCallback;
 import com.easylib.utils.ImageLoadUtils;
 import com.easylib.utils.ImagePickUtils;
 import com.easylib.utils.ToastUtils;
 import com.guyj.img.EasyImageView;
+import com.lzy.okhttputils.request.BaseRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * 编辑资料
@@ -59,6 +67,8 @@ public class EditActivity extends BaseActivity {
     EditText etSign;
     @Bind(R.id.activity_edit)
     LinearLayout activityEdit;
+    LoginBean userInfo;
+    List<LabelBean.DataBean> labels;
 
     @Override
     public int getContentViewId() {
@@ -72,11 +82,26 @@ public class EditActivity extends BaseActivity {
 
     @Override
     protected void initVariable() {
-
+        labels = new ArrayList<>();
     }
 
     @Override
     protected void processLogic(Bundle savedInstanceState) {
+        getAllLabel();
+        userInfo = EasySP.getInstance().loadUserInfo();
+        ImageLoadUtils.into(userInfo.getData().getHeadPortrait(), ivHead);
+        etNickname.setText(userInfo.getData().getNickname());
+        etName.setText(userInfo.getData().getRealname());
+        etSex.setText(userInfo.getData().getGender());
+        etAge.setText(userInfo.getData().getAge() + "");
+        etGrade.setText(userInfo.getData().getGrade());
+        etStudentid.setText(userInfo.getData().getStudentId());
+        etCollege.setText(userInfo.getData().getProfessionId());
+        //标签
+
+        etHometown.setText(userInfo.getData().getHome());
+        etContact.setText(userInfo.getData().getPhone());
+        etSign.setText(userInfo.getData().getSignature());
 
     }
 
@@ -104,5 +129,36 @@ public class EditActivity extends BaseActivity {
                 });
                 break;
         }
+    }
+
+    private void getAllLabel() {
+        HttpUtils.getInstance().label(new ResultCallback<LabelBean>() {
+            @Override
+            public void onAfter(@Nullable LabelBean labelBean, @Nullable Exception e) {
+                dismissDialog();
+            }
+
+            @Override
+            public void onCacheSuccess(LabelBean labelBean, Call call) {
+
+            }
+
+            @Override
+            public void onBefored(BaseRequest request) {
+                showDialog();
+            }
+
+            @Override
+            public void onErrored(Call call, Response response, Exception e) {
+
+            }
+
+            @Override
+            public void onSuccess(LabelBean labelBean, Call call, Response response) {
+                if (labelBean != null && labelBean.getCode() == 200) {
+                    labels.addAll(labelBean.getData());
+                }
+            }
+        });
     }
 }

@@ -1,5 +1,6 @@
 package com.community;
 
+import com.community.entity.LoginBean;
 import com.easylib.base.BaseSharedPreferences;
 
 /**
@@ -17,6 +18,15 @@ public class EasySP extends BaseSharedPreferences {
     }
     private EasySP() {
     }
+
+    public void saveUserInfo(LoginBean bean) {
+        saveObj("userinfo", bean);
+    }
+
+    public LoginBean loadUserInfo() {
+        return (LoginBean) loadObj("userinfo");
+    }
+
 
     /**
      * example save userName

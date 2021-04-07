@@ -12,11 +12,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".EditActivity"
@@ -25,7 +21,14 @@
         <activity android:name=".RefuseActivity" />
         <activity android:name=".ClubEventsActivity" />
         <activity android:name=".MemberListActivity" />
-        <activity android:name=".JoinClubActivity"></activity>
+        <activity android:name=".JoinClubActivity" />
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
