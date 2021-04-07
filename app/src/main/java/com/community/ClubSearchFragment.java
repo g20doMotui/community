@@ -58,6 +58,9 @@ public class ClubSearchFragment extends BaseFragment {
     @Override
     protected void initVariable() {
         datas = new ArrayList<>();
+        pop1beans=new ArrayList<>();
+        pop2beans=new ArrayList<>();
+        pop3beans=new ArrayList<>();
         datas.add("1");
         datas.add("2");
         datas.add("3");
@@ -109,9 +112,9 @@ public class ClubSearchFragment extends BaseFragment {
     //弹框;
     private PopupWindow popupWindow;
     private View view;
-    private List<String> pop1beans=new ArrayList<>();
-    private List<String> pop2beans=new ArrayList<>();
-    private List<String> pop3beans=new ArrayList<>();
+    private List<String> pop1beans;
+    private List<String> pop2beans;
+    private List<String> pop3beans;
     //
     private void showPop() {
 
