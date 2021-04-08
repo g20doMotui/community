@@ -1,12 +1,17 @@
 package com.community;
 
 import com.community.entity.ActivitiesBean;
+import com.community.entity.AppliesBean;
 import com.community.entity.ClubBean;
 import com.community.entity.CommunitiesBean;
 import com.community.entity.LabelBean;
 import com.community.entity.LevelBean;
+import com.community.entity.ListBean;
 import com.community.entity.LoginBean;
+import com.community.entity.MyClub;
 import com.community.entity.ProfessionBean;
+import com.community.entity.RefusedBean;
+import com.community.entity.ThroughBean;
 import com.community.entity.TypeBean;
 import com.easylib.base.BaseHttpUtils;
 import com.easylib.okhttp.ResultCallback;
@@ -32,7 +37,7 @@ public class HttpUtils extends BaseHttpUtils {
     }
 
     private HttpParams httpParams;
-    private String host = "http://192.168.1.6:8080";
+    private String host = "http://192.168.2.37:8080";
     private String login = "/api/members/login";//登录
     private String activities = "/api/activities";//活动列表
     private String communities = "/api/communities";//社团列表
@@ -42,6 +47,11 @@ public class HttpUtils extends BaseHttpUtils {
     private String level = "/api/others/level";//社团级别
     private String profession = "/api/others/profession";//社团专业
     private String type = "/api/others/type";//社团类型
+    private String applies = "/api/applies";//申请加入
+    private String list = "/api/applies/list";//拉取申请加入的信息，论
+    private String through = "/api/applies/through";//同意申请
+    private String refused = "/api/applies/refused";//拒绝申请
+    private String userinfo = "/api/members/";//会员详情
 
     public void login(String loginName, String loginPwd, ResultCallback<LoginBean> callback) {
         httpParams = new HttpParams();
@@ -72,7 +82,7 @@ public class HttpUtils extends BaseHttpUtils {
         httpGet(host, communitiesinfo + clubId, httpParams, callback);
     }
 
-    public void member(String userid, ResultCallback<LabelBean> callback) {
+    public void member(String userid, ResultCallback<MyClub> callback) {
         httpParams = new HttpParams();
         httpGet(host, member + userid, httpParams, callback);
     }
@@ -95,6 +105,30 @@ public class HttpUtils extends BaseHttpUtils {
     public void type(ResultCallback<TypeBean> callback) {
         httpParams = new HttpParams();
         httpGet(host, type, httpParams, callback);
+    }
+    public void applies(String memberId,String communityId,ResultCallback<AppliesBean> callback) {
+        httpParams = new HttpParams();
+        httpParams.put("memberId", memberId);
+        httpParams.put("communityId", communityId);
+        httpPost(host, applies, httpParams, callback);
+    }
+
+    public void list(String memberId,ResultCallback<ListBean> callback) {
+        httpParams = new HttpParams();
+        httpParams.put("memberId", memberId);
+        httpGet(host, list, httpParams, callback);
+    }
+
+    public void through(String applyId,ResultCallback<ThroughBean> callback) {
+        httpParams = new HttpParams();
+        httpParams.put("applyId", applyId);
+        httpGet(host, through, httpParams, callback);
+    }
+    public void refused(String applyId,String reason,ResultCallback<RefusedBean> callback) {
+        httpParams = new HttpParams();
+        httpParams.put("applyId", applyId);
+        httpParams.put("reason", reason);
+        httpGet(host, refused, httpParams, callback);
     }
 
 

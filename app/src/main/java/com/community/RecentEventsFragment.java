@@ -11,11 +11,13 @@ import android.view.View;
 import com.community.entity.ActivitiesBean;
 import com.easylib.base.BaseFragment;
 import com.easylib.okhttp.ResultCallback;
+import com.easylib.utils.ImageLoadUtils;
 import com.easylib.utils.LogUtils;
 import com.easylib.utils.ToastUtils;
 import com.easylib.views.DividerItemDecoration;
 import com.guyj.CommonAdapter;
 import com.guyj.base.ViewHolder;
+import com.guyj.img.EasyImageView;
 import com.lzy.okhttputils.request.BaseRequest;
 
 import java.util.ArrayList;
@@ -31,6 +33,8 @@ import okhttp3.Response;
  */
 public class RecentEventsFragment extends BaseFragment {
 
+    @Bind(R.id.iv_head)
+    EasyImageView iv_head;
     @Bind(R.id.recycler)
     RecyclerView recycler;
     LinearLayoutManager llm;
@@ -52,13 +56,15 @@ public class RecentEventsFragment extends BaseFragment {
         llm = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         adapter = new CommonAdapter<ActivitiesBean.DataBean.ActivityPageBean.ContentBean>(mContext, R.layout.item_recent_events, datas) {
             @Override
-            protected void convert(ViewHolder viewHolder, ActivitiesBean.DataBean.ActivityPageBean.ContentBean o, int i) {
+            protected void convert(ViewHolder viewHolder, final ActivitiesBean.DataBean.ActivityPageBean.ContentBean o, int i) {
                 viewHolder.setText(R.id.tv_name, o.getCommunityName());
-                viewHolder.setText(R.id.tv_content, o.getTitle() + "\n" + o.getContent());
+                viewHolder.setText(R.id.tv_content, o.getContent());
                 viewHolder.setOnClickListener(R.id.rl_root, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startActivity(new Intent(mContext,ClubEventsActivity.class));
+                        Intent intent=new  Intent(mContext,ClubEventsActivity.class);
+                        intent.putExtra("event",o);
+                        startActivity(intent);
                     }
                 });
             }
@@ -72,6 +78,7 @@ public class RecentEventsFragment extends BaseFragment {
 
     @Override
     protected void processLogic(Bundle savedInstanceState) {
+        ImageLoadUtils.into(EasySP.getInstance().loadUserInfo().getData().getHeadPortrait(),iv_head);
         recycler.setLayoutManager(llm);
         recycler.setAdapter(adapter);
         recycler.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL_LIST));

@@ -69,6 +69,7 @@ public class EditActivity extends BaseActivity {
     LinearLayout activityEdit;
     LoginBean userInfo;
     List<LabelBean.DataBean> labels;
+    String headUrl;
 
     @Override
     public int getContentViewId() {
@@ -113,6 +114,20 @@ public class EditActivity extends BaseActivity {
                 break;
             case R.id.tv_submit:
                 ToastUtils.showToast("修改成功");
+                userInfo.getData().setHeadPortrait(headUrl);
+                userInfo.getData().setNickname(etNickname.getText().toString().trim());
+                userInfo.getData().setRealname(etName.getText().toString().trim());
+                userInfo.getData().setGender(etSex.getText().toString().trim());
+                userInfo.getData().setAge(Integer.parseInt(etAge.getText().toString().trim()));
+                userInfo.getData().setGrade(etGrade.getText().toString().trim());
+                userInfo.getData().setStudentId(etStudentid.getText().toString().trim());
+                userInfo.getData().setProfessionId(etCollege.getText().toString().trim());
+                userInfo.getData().setHome(etHometown.getText().toString().trim());
+                userInfo.getData().setPhone(etContact.getText().toString().trim());
+                userInfo.getData().setSignature(etSign.getText().toString().trim());
+                //标签
+
+                EasySP.getInstance().saveUserInfo(userInfo);
                 finish();
                 break;
             case R.id.iv_head:

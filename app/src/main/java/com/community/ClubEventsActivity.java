@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.community.entity.ActivitiesBean;
 import com.easylib.base.BaseActivity;
 
 import butterknife.Bind;
@@ -16,10 +17,13 @@ import butterknife.OnClick;
  */
 public class ClubEventsActivity extends BaseActivity {
 
+    @Bind(R.id.tv_content)
+    TextView tvContent;
     @Bind(R.id.tv_name)
     TextView tvName;
     @Bind(R.id.title)
     RelativeLayout title;
+    ActivitiesBean.DataBean.ActivityPageBean.ContentBean bean;
 
     @Override
     public int getContentViewId() {
@@ -33,12 +37,13 @@ public class ClubEventsActivity extends BaseActivity {
 
     @Override
     protected void initVariable() {
-
+        bean= (ActivitiesBean.DataBean.ActivityPageBean.ContentBean) getIntent().getSerializableExtra("event");
     }
 
     @Override
     protected void processLogic(Bundle savedInstanceState) {
-
+        tvName.setText(bean.getCommunityName());
+        tvContent.setText(bean.getContent());
     }
 
     @OnClick({R.id.tv_back, R.id.tv_list})
