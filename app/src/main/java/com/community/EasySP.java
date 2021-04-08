@@ -1,5 +1,6 @@
 package com.community;
 
+import com.community.entity.ListBean;
 import com.community.entity.LoginBean;
 import com.easylib.base.BaseSharedPreferences;
 
@@ -27,36 +28,12 @@ public class EasySP extends BaseSharedPreferences {
         return (LoginBean) loadObj("userinfo");
     }
 
-
-    /**
-     * example save userName
-     * @param userName
-     */
-    public void saveUserName(String userName){
-        saveString("userName",userName);
+    public void saveJoinInfo(ListBean bean) {
+        saveObj("ListBean", bean);
     }
 
-    /**
-     * example load userName
-     * @return
-     */
-    public String loadUserName(){
-        return loadString("userName");
+    public ListBean loadJoinInfo() {
+        return (ListBean) loadObj("ListBean");
     }
 
-    /**
-     * example save with active time 带缓存有效时间（毫秒）
-     * @param token
-     */
-    public void saveToken(String token, Long ActiveTime){
-        saveStrCache("token",token,ActiveTime);
-    }
-
-    /**
-     * example load with active time 带缓存有效时间（毫秒）
-     * @return
-     */
-    public String loadToken(){
-        return loadStrCache("token");
-    }
 }

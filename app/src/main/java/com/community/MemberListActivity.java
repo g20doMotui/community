@@ -6,7 +6,6 @@ import android.widget.RelativeLayout;
 import com.easylib.base.BaseActivity;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

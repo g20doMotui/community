@@ -20,7 +20,6 @@ public class MainActivity extends BaseActivity {
 
     private ArrayList<TabItem> mTableItemList;
     private FragmentTabHost fragmentTabHost;
-
     @Override
     public int getContentViewId() {
         return R.layout.activity_main;
@@ -39,7 +38,13 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void processLogic(Bundle savedInstanceState) {
+        startService(MyApp.serviceIntent);
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(MyApp.serviceIntent);
     }
 
     //初始化Tab数据

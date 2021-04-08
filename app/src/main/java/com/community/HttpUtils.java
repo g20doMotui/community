@@ -13,6 +13,7 @@ import com.community.entity.ProfessionBean;
 import com.community.entity.RefusedBean;
 import com.community.entity.ThroughBean;
 import com.community.entity.TypeBean;
+import com.community.entity.UserInfoBean;
 import com.easylib.base.BaseHttpUtils;
 import com.easylib.okhttp.ResultCallback;
 import com.lzy.okhttputils.model.HttpParams;
@@ -37,7 +38,7 @@ public class HttpUtils extends BaseHttpUtils {
     }
 
     private HttpParams httpParams;
-    private String host = "http://192.168.2.37:8080";
+    private String host = "http://139.199.14.32:8080";
     private String login = "/api/members/login";//登录
     private String activities = "/api/activities";//活动列表
     private String communities = "/api/communities";//社团列表
@@ -129,6 +130,11 @@ public class HttpUtils extends BaseHttpUtils {
         httpParams.put("applyId", applyId);
         httpParams.put("reason", reason);
         httpGet(host, refused, httpParams, callback);
+    }
+
+    public void userinfo(String memberId, ResultCallback<UserInfoBean> callback) {
+        httpParams = new HttpParams();
+        httpGet(host, userinfo + memberId, httpParams, callback);
     }
 
 

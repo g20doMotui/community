@@ -76,11 +76,11 @@ public abstract class ResultCallback<T> extends AbsCallback<T>{
     @Override
     public void onError(Call call, Response response, Exception e){
         if (null!=response){
-            LogUtils.eLoger("url:"+response.request().url()
-                    +"\nheader:"+response.request().headers()
-                    +"content:"+bodyToString(response.request())
-                    +"\nreceived-time:"+ DateFormatUtils.long2StringByFormat(response.receivedResponseAtMillis(),DateFormatUtils.getHHmmssSSSChinaFormat())
-                    +"\nmsg:"+e.getMessage());
+//            LogUtils.eLoger("url:"+response.request().url()
+//                    +"\nheader:"+response.request().headers()
+//                    +"content:"+bodyToString(response.request())
+//                    +"\nreceived-time:"+ DateFormatUtils.long2StringByFormat(response.receivedResponseAtMillis(),DateFormatUtils.getHHmmssSSSChinaFormat())
+//                    +"\nmsg:"+e.getMessage());
         }
         onErrored(call,response,e);
     }
