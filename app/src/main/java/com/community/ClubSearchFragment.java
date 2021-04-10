@@ -54,6 +54,7 @@ public class ClubSearchFragment extends BaseFragment {
     LinearLayoutManager llm;
     CommonAdapter adapter;
     List<CommunitiesBean.DataBean.CommunityPageBean.ContentBean> datas;
+    List<CommunitiesBean.DataBean.CommunityPageBean.ContentBean> datas2;
     @Bind(R.id.search)
     SearchView search;
 
@@ -100,6 +101,7 @@ public class ClubSearchFragment extends BaseFragment {
         search.setIconifiedByDefault(false);//查询图标默认位于编辑框true内 false外
         search.setSubmitButtonEnabled(true);
 
+
         recycler.setLayoutManager(llm);
         recycler.setAdapter(adapter);
         recycler.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL_LIST));
@@ -108,6 +110,25 @@ public class ClubSearchFragment extends BaseFragment {
         getJiBie();
         getZhuanYe();
         getLeiXing();
+
+
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                for (int i = 0; i < datas.size(); i++) {
+                    if (!datas.get(i).getName().contains(query)) {
+                        datas2.add(datas.get(i));
+                    }
+                }
+                adapter.setDatas(datas2);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 
     private void getLeiXing() {
