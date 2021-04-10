@@ -118,7 +118,7 @@ public class ClubSearchFragment extends BaseFragment {
             public boolean onQueryTextSubmit(String query) {
                 datas2.clear();
                 for (int i = 0; i < datas.size(); i++) {
-                    if (!datas.get(i).getName().contains(query)) {
+                    if (datas.get(i).getName().contains(query)) {
                         datas2.add(datas.get(i));
                     }
                 }
