@@ -8,11 +8,13 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.community.entity.AppliesBean;
 import com.community.entity.ClubBean;
 import com.community.entity.CommunitiesBean;
 import com.easylib.base.BaseActivity;
 import com.easylib.okhttp.ResultCallback;
 import com.easylib.utils.ImageLoadUtils;
+import com.easylib.utils.ToastUtils;
 import com.guyj.img.EasyImageView;
 import com.lzy.okhttputils.request.BaseRequest;
 
@@ -108,8 +110,42 @@ public class ClubInfoActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_submit:
-                startActivity(new Intent(mContext,JoinClubActivity.class));
+//                startActivity(new Intent(mContext,JoinClubActivity.class));
+                submit();
                 break;
         }
+    }
+
+    private void submit() {
+        HttpUtils.getInstance().applies(EasySP.getInstance().loadUserInfo().getData().getId(), bean.getId(), new ResultCallback<AppliesBean>() {
+            @Override
+            public void onAfter(@Nullable AppliesBean appliesBean, @Nullable Exception e) {
+                dismissDialog();
+            }
+
+            @Override
+            public void onCacheSuccess(AppliesBean appliesBean, Call call) {
+
+            }
+
+            @Override
+            public void onBefored(BaseRequest request) {
+                showDialog();
+            }
+
+            @Override
+            public void onErrored(Call call, Response response, Exception e) {
+
+            }
+
+            @Override
+            public void onSuccess(AppliesBean appliesBean, Call call, Response response) {
+                if (appliesBean != null && appliesBean.getCode() == 202) {
+                    ToastUtils.showToast("提交成功");
+                } else if (appliesBean != null && appliesBean.getCode() == 400) {
+                    ToastUtils.showToast("已经提交，请勿重复提交");
+                }
+            }
+        });
     }
 }

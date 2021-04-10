@@ -85,6 +85,18 @@ public class RecentEventsFragment extends BaseFragment {
         getActivities();
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        ImageLoadUtils.into(EasySP.getInstance().loadUserInfo().getData().getHeadPortrait(), iv_head);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ImageLoadUtils.into(EasySP.getInstance().loadUserInfo().getData().getHeadPortrait(), iv_head);
+    }
+
     private void getActivities() {
         HttpUtils.getInstance().activities(new ResultCallback<ActivitiesBean>() {
             @Override

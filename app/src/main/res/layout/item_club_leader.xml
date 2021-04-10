@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:id="@+id/rl_root">
+
+    <TextView
+        android:id="@+id/tv_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="团长"
+        android:padding="10dp" />
+
+    <com.guyj.img.EasyImageView
+        android:id="@+id/iv_photo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_below="@id/tv_temp" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="name"
+        android:layout_toRightOf="@id/iv_photo"
+        android:layout_alignTop="@id/iv_photo" />
+
+    <TextView
+        android:id="@+id/tv_sign"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="content"
+        android:padding="5dp"
+        android:layout_toRightOf="@id/iv_photo"
+        android:layout_below="@id/tv_name"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="成员"
+        android:padding="10dp"
+        android:layout_below="@id/iv_photo" />
+</RelativeLayout>

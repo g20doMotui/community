@@ -51,7 +51,7 @@ public class MyService extends Service {
 
                     @Override
                     public void onSuccess(ListBean listBean, Call call, Response response) {
-                        if (listBean != null && listBean.getCode() == 200 && listBean.getData() != null) {
+                        if (listBean != null && listBean.getCode() == 200 && listBean.getData() != null && "0".equals(listBean.getData().getApplyStatus())) {
                             EasySP.getInstance().saveJoinInfo(listBean);
                             Intent dialogIntent = new Intent(getApplicationContext(), JoinClubActivity.class);
                             dialogIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

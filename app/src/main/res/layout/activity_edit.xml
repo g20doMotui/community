@@ -35,7 +35,7 @@
             android:id="@+id/tv_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="完成"
+            android:text="编辑"
             android:textColor="@color/white"
             android:padding="10dp"
             android:layout_alignParentRight="true"
@@ -70,6 +70,7 @@
             android:id="@+id/et_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:hint="昵称"
             android:maxLines="1"
             android:singleLine="true" />
@@ -83,6 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="姓名"
+            android:enabled="false"
             android:maxLines="1"
             android:singleLine="true" />
     </android.support.design.widget.TextInputLayout>
@@ -94,6 +96,7 @@
             android:id="@+id/et_sex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:hint="性别"
             android:maxLines="1"
             android:singleLine="true" />
@@ -106,6 +109,7 @@
             android:id="@+id/et_age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:hint="年龄"
             android:maxLines="1"
             android:singleLine="true" />
@@ -118,6 +122,7 @@
             android:id="@+id/et_grade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:hint="年级"
             android:maxLines="1"
             android:singleLine="true" />
@@ -131,6 +136,7 @@
             android:id="@+id/et_studentid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:hint="学号"
             android:maxLines="1"
             android:singleLine="true" />
@@ -142,6 +148,7 @@
             android:id="@+id/et_college"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:hint="专业/学院"
             android:maxLines="1"
             android:singleLine="true" />
@@ -170,7 +177,7 @@
                 android:button="@null"
                 android:layout_margin="10dp"
                 android:padding="5dp"
-                android:text="111"
+                android:text="英语"
                 />
 
             <CheckBox
@@ -181,7 +188,7 @@
                 android:button="@null"
                 android:layout_margin="10dp"
                 android:padding="5dp"
-                android:text="222"
+                android:text="体育"
                 />
 
             <CheckBox
@@ -192,7 +199,7 @@
                 android:button="@null"
                 android:layout_margin="10dp"
                 android:padding="5dp"
-                android:text="333"
+                android:text="写作"
                 />
         </com.google.android.flexbox.FlexboxLayout>
 
@@ -203,6 +210,7 @@
             android:id="@+id/et_hometown"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:hint="故乡"
             android:maxLines="1"
             android:singleLine="true" />
@@ -214,6 +222,7 @@
             android:id="@+id/et_contact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:hint="联系方式"
             android:maxLines="1"
             android:singleLine="true" />
@@ -225,6 +234,7 @@
             android:id="@+id/et_sign"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:hint="个性签名"
             android:maxLines="1"
             android:singleLine="true" />

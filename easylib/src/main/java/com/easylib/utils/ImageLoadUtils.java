@@ -25,13 +25,18 @@ public class ImageLoadUtils {
      */
     public static boolean into(String path, ImageView imageView) {
         if (!TextUtils.isEmpty(path)) {
-            Picasso.with(BaseConfig.application)
-                    .load(path)
-                    .tag(mTAG)
-                    .config(Bitmap.Config.RGB_565)
-                    .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
-                    .transform(getTransformation(imageView))
-                    .into(imageView);
+            if (path.startsWith("http")) {
+                Picasso.with(BaseConfig.application)
+                        .load(path)
+                        .tag(mTAG)
+                        .config(Bitmap.Config.RGB_565)
+                        .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+                        .transform(getTransformation(imageView))
+                        .into(imageView);
+            } else {
+                intoForImagePicker(path, imageView);
+            }
+
             return true;
         } else {
             return false;

@@ -53,7 +53,9 @@ public class ClubEventsActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_list:
-                startActivity(new Intent(mContext,MemberListActivity.class));
+                Intent intent = new Intent(mContext, MemberListActivity.class);
+                intent.putExtra("clubid", bean.getCommunityId());
+                startActivity(intent);
                 break;
         }
     }

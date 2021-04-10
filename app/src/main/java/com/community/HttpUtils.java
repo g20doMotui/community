@@ -8,6 +8,7 @@ import com.community.entity.LabelBean;
 import com.community.entity.LevelBean;
 import com.community.entity.ListBean;
 import com.community.entity.LoginBean;
+import com.community.entity.MemberListBean;
 import com.community.entity.MyClub;
 import com.community.entity.ProfessionBean;
 import com.community.entity.RefusedBean;
@@ -53,6 +54,7 @@ public class HttpUtils extends BaseHttpUtils {
     private String through = "/api/applies/through";//同意申请
     private String refused = "/api/applies/refused";//拒绝申请
     private String userinfo = "/api/members/";//会员详情
+    private String memberlist = "/api/communities/member/list/";//会员列表
 
     public void login(String loginName, String loginPwd, ResultCallback<LoginBean> callback) {
         httpParams = new HttpParams();
@@ -135,6 +137,11 @@ public class HttpUtils extends BaseHttpUtils {
     public void userinfo(String memberId, ResultCallback<UserInfoBean> callback) {
         httpParams = new HttpParams();
         httpGet(host, userinfo + memberId, httpParams, callback);
+    }
+
+    public void memberlist(String clubid, ResultCallback<MemberListBean> callback) {
+        httpParams = new HttpParams();
+        httpGet(host, memberlist + clubid, httpParams, callback);
     }
 
 

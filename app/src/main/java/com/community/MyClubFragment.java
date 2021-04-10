@@ -9,12 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.community.entity.ActivitiesBean;
 import com.community.entity.LabelBean;
 import com.community.entity.MyClub;
 import com.easylib.base.BaseFragment;
 import com.easylib.okhttp.ResultCallback;
 import com.easylib.utils.ImageLoadUtils;
 import com.easylib.utils.LogUtils;
+import com.easylib.utils.ToastUtils;
 import com.easylib.views.DividerItemDecoration;
 import com.guyj.CommonAdapter;
 import com.guyj.base.ViewHolder;
@@ -57,14 +59,15 @@ public class MyClubFragment extends BaseFragment {
         llm=new LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false);
         adapter=new CommonAdapter<MyClub.DataBean.CommunityListBean>(mContext,R.layout.item_my_club,datas) {
             @Override
-            protected void convert(ViewHolder viewHolder, MyClub.DataBean.CommunityListBean o, int i) {
+            protected void convert(ViewHolder viewHolder, MyClub.DataBean.CommunityListBean o, final int i) {
                 viewHolder.setText(R.id.tv_name,o.getName());
                 viewHolder.setText(R.id.tv_content, o.getIntroduction());
                 ImageLoadUtils.into(o.getEmblemUrl(), (ImageView) viewHolder.getView(R.id.iv_photo));
                 viewHolder.setOnClickListener(R.id.rl_root, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-//                        startActivity(new Intent(mContext,ClubEventsActivity.class));
+                        getActivities(i);
+
                     }
                 });
             }
@@ -83,6 +86,18 @@ public class MyClubFragment extends BaseFragment {
         recycler.setLayoutManager(llm);
         recycler.setAdapter(adapter);
         recycler.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL_LIST));
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        ImageLoadUtils.into(EasySP.getInstance().loadUserInfo().getData().getHeadPortrait(), iv_head);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ImageLoadUtils.into(EasySP.getInstance().loadUserInfo().getData().getHeadPortrait(), iv_head);
     }
 
     private void getMyClub() {
@@ -113,6 +128,46 @@ public class MyClubFragment extends BaseFragment {
                     datas.clear();
                     datas.addAll(bean.getData().getCommunityList());
                     adapter.setDatas(datas);
+                }
+            }
+        });
+    }
+
+    private void getActivities(final int num) {
+        HttpUtils.getInstance().activities(new ResultCallback<ActivitiesBean>() {
+            @Override
+            public void onAfter(@Nullable ActivitiesBean activitiesBean, @Nullable Exception e) {
+                dismissDialog();
+            }
+
+            @Override
+            public void onCacheSuccess(ActivitiesBean activitiesBean, Call call) {
+
+            }
+
+            @Override
+            public void onBefored(BaseRequest request) {
+                showDialog();
+            }
+
+            @Override
+            public void onErrored(Call call, Response response, Exception e) {
+//                ToastUtils.showToast("加载失败");
+            }
+
+            @Override
+            public void onSuccess(ActivitiesBean activitiesBean, Call call, Response response) {
+                if (activitiesBean != null && activitiesBean.getCode() == 200) {
+                    List<ActivitiesBean.DataBean.ActivityPageBean.ContentBean> var = activitiesBean.getData().getActivityPage().getContent();
+                    for (int i = 0; i < var.size(); i++) {
+                        if (var.get(i).getCommunityId().equals(datas.get(num).getId())) {
+                            Intent intent = new Intent(mContext, ClubEventsActivity.class);
+                            intent.putExtra("event", var.get(i));
+                            startActivity(intent);
+                        }
+                    }
+//                    adapter.setDatas(datas);
+//                    ToastUtils.showToast("加载成功");
                 }
             }
         });

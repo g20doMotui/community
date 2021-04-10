@@ -14,6 +14,7 @@ import com.easylib.base.BaseActivity;
 import com.easylib.okhttp.ResultCallback;
 import com.easylib.utils.ImageLoadUtils;
 import com.easylib.utils.ImagePickUtils;
+import com.easylib.utils.LogUtils;
 import com.easylib.utils.ToastUtils;
 import com.guyj.img.EasyImageView;
 import com.lzy.okhttputils.request.BaseRequest;
@@ -71,6 +72,8 @@ public class EditActivity extends BaseActivity {
     List<LabelBean.DataBean> labels;
     String headUrl;
 
+    boolean canEdit = false;
+
     @Override
     public int getContentViewId() {
         return R.layout.activity_edit;
@@ -91,6 +94,7 @@ public class EditActivity extends BaseActivity {
         getAllLabel();
         userInfo = EasySP.getInstance().loadUserInfo();
         ImageLoadUtils.into(userInfo.getData().getHeadPortrait(), ivHead);
+        LogUtils.e(TAG, userInfo.getData().getHeadPortrait());
         etNickname.setText(userInfo.getData().getNickname());
         etName.setText(userInfo.getData().getRealname());
         etSex.setText(userInfo.getData().getGender());
@@ -113,28 +117,49 @@ public class EditActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_submit:
-                ToastUtils.showToast("修改成功");
-                userInfo.getData().setHeadPortrait(headUrl);
-                userInfo.getData().setNickname(etNickname.getText().toString().trim());
-                userInfo.getData().setRealname(etName.getText().toString().trim());
-                userInfo.getData().setGender(etSex.getText().toString().trim());
-                userInfo.getData().setAge(Integer.parseInt(etAge.getText().toString().trim()));
-                userInfo.getData().setGrade(etGrade.getText().toString().trim());
-                userInfo.getData().setStudentId(etStudentid.getText().toString().trim());
-                userInfo.getData().setProfessionId(etCollege.getText().toString().trim());
-                userInfo.getData().setHome(etHometown.getText().toString().trim());
-                userInfo.getData().setPhone(etContact.getText().toString().trim());
-                userInfo.getData().setSignature(etSign.getText().toString().trim());
-                //标签
+                if (!canEdit) {
+                    canEdit = true;
+                    tvSubmit.setText("完成");
+                    etContact.setEnabled(canEdit);
+                    etSign.setEnabled(canEdit);
+                    etHometown.setEnabled(canEdit);
+                    etCollege.setEnabled(canEdit);
+                    etStudentid.setEnabled(canEdit);
+                    etAge.setEnabled(canEdit);
+                    etGrade.setEnabled(canEdit);
+                    etName.setEnabled(canEdit);
+                    etNickname.setEnabled(canEdit);
+                    etSex.setEnabled(canEdit);
+                } else {
+                    canEdit = false;
+                    tvSubmit.setText("编辑");
+                    ToastUtils.showToast("修改成功");
+                    userInfo.getData().setHeadPortrait(headUrl);
+                    userInfo.getData().setNickname(etNickname.getText().toString().trim());
+                    userInfo.getData().setRealname(etName.getText().toString().trim());
+                    userInfo.getData().setGender(etSex.getText().toString().trim());
+                    userInfo.getData().setAge(Integer.parseInt(etAge.getText().toString().trim()));
+                    userInfo.getData().setGrade(etGrade.getText().toString().trim());
+                    userInfo.getData().setStudentId(etStudentid.getText().toString().trim());
+                    userInfo.getData().setProfessionId(etCollege.getText().toString().trim());
+                    userInfo.getData().setHome(etHometown.getText().toString().trim());
+                    userInfo.getData().setPhone(etContact.getText().toString().trim());
+                    userInfo.getData().setSignature(etSign.getText().toString().trim());
+                    //标签
 
-                EasySP.getInstance().saveUserInfo(userInfo);
-                finish();
+                    EasySP.getInstance().saveUserInfo(userInfo);
+                    finish();
+                }
+
+
                 break;
             case R.id.iv_head:
+                if (canEdit)
                 ImagePickUtils.openImagePick(1, new ImagePickUtils.ImagePickListener() {
                     @Override
                     public void onHanlderSuccess(int requestCode, List<PhotoInfo> resultList) {
                         ImageLoadUtils.intoForImagePicker(resultList.get(0).getPhotoPath(), ivHead);
+                        headUrl = resultList.get(0).getPhotoPath();
                     }
 
                     @Override
