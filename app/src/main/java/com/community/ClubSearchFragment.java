@@ -72,6 +72,7 @@ public class ClubSearchFragment extends BaseFragment {
     @Override
     protected void initVariable() {
         datas = new ArrayList<>();
+        datas2 = new ArrayList<>();
         pop1beans=new ArrayList<>();
         pop2beans=new ArrayList<>();
         pop3beans=new ArrayList<>();
