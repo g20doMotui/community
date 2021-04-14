@@ -94,7 +94,9 @@ public class EditActivity extends BaseActivity {
         getAllLabel();
         userInfo = EasySP.getInstance().loadUserInfo();
         ImageLoadUtils.into(userInfo.getData().getHeadPortrait(), ivHead);
-        LogUtils.e(TAG, userInfo.getData().getHeadPortrait());
+        if (null != userInfo.getData().getHeadPortrait()) {
+            headUrl = userInfo.getData().getHeadPortrait();
+        }
         etNickname.setText(userInfo.getData().getNickname());
         etName.setText(userInfo.getData().getRealname());
         etSex.setText(userInfo.getData().getGender());

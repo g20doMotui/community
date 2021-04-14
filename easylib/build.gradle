@@ -3,7 +3,14 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
-
+    signingConfigs {
+        release {
+            keyAlias 'abcdefg'
+            keyPassword 'abcdefg'
+            storeFile file('club.jks')
+            storePassword 'abcdefg'
+        }
+    }
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 25
