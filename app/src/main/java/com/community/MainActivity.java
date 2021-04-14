@@ -6,11 +6,15 @@ import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
+import com.community.bad.Utils;
 import com.easylib.base.BaseActivity;
 import com.easylib.utils.LogUtils;
 
@@ -20,6 +24,7 @@ public class MainActivity extends BaseActivity {
 
     private ArrayList<TabItem> mTableItemList;
     private FragmentTabHost fragmentTabHost;
+    String flag;
     @Override
     public int getContentViewId() {
         return R.layout.activity_main;
@@ -27,8 +32,19 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        // 启动百度push
+        PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY,
+                Utils.getMetaValue(mContext, "api_key"));
         initTabData();
         initTabHost();
+
+    }
+
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        fragmentTabHost.setCurrentTab(1);
     }
 
     @Override
@@ -45,6 +61,7 @@ public class MainActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         stopService(MyApp.serviceIntent);
+        PushManager.stopWork(getApplicationContext());
     }
 
     //初始化Tab数据

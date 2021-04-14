@@ -92,12 +92,15 @@ public class ClubInfoActivity extends BaseActivity {
             public void onSuccess(ClubBean clubBean, Call call, Response response) {
                 if (clubBean != null && clubBean.getCode() == 200) {
                     bean = clubBean.getData().getCommunity();
-                    ImageLoadUtils.into(bean.getEmblemUrl(), ivPhoto);
-                    tvName.setText("社团：" + bean.getName());
-                    tvJibie.setText("级别：" + bean.getLevelId());
-                    tvXueyuan.setText("学院：" + bean.getProfessionId());
-                    tvLeixing.setText("类型：" + bean.getTypeId());
-                    tvJianjie.setText("简介：" + bean.getIntroduction());
+                    if (null != bean) {
+                        ImageLoadUtils.into(bean.getEmblemUrl(), ivPhoto);
+                        tvName.setText("社团：" + bean.getName());
+                        tvJibie.setText("级别：" + bean.getLevelId());
+                        tvXueyuan.setText("学院：" + bean.getProfessionId());
+                        tvLeixing.setText("类型：" + bean.getTypeId());
+                        tvJianjie.setText("简介：" + bean.getIntroduction());
+                    }
+
                 }
             }
         });
